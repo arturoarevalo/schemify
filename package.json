@@ -1,0 +1,19 @@
+﻿{
+  "name": "schemify",
+  "version": "0.0.1",
+  "description": "A lightweight framework for object schema validation",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/arturoarevalo/schemify.git"
+  },
+  "author": "Arturo Arévalo",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/arturoarevalo/schemify/issues"
+  },
+  "homepage": "https://github.com/arturoarevalo/schemify#readme"
+}
