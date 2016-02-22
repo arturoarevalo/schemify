@@ -1,21 +1,31 @@
-﻿{
+{
   "name": "schemify",
   "version": "0.0.1",
   "description": "A lightweight and simple framework for complex object schema validation, including nested objects, arrays and inheritance, with a nice syntax in coffeescript.",
   "main": "./lib/schemify.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha --require ./fix_tests.js --compilers coffee:coffee-script ./test/*.iced",
     "prepublish": "rm -rf lib && mkdir lib && iced -b -c -o lib/ -I node src/*.iced"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/arturoarevalo/schemify.git"
   },
-  "keywords": ["schema", "scheme", "validation", "conform", "coffeescript", "coffee"],
+  "keywords": [
+    "schema",
+    "scheme",
+    "validation",
+    "conform",
+    "coffeescript",
+    "coffee"
+  ],
   "author": "Arturo Arévalo",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/arturoarevalo/schemify/issues"
   },
-  "homepage": "https://github.com/arturoarevalo/schemify#readme"
+  "homepage": "https://github.com/arturoarevalo/schemify#readme",
+  "devDependencies": {
+    "iced-coffee-script": "^108.0.9"
+  }
 }

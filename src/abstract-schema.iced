@@ -64,7 +64,7 @@ class AbstractSchema
         return res.valid
 
     createNew: (value = null) -> switch
-        when @isEmpty value or not @check value then TypeChecker.clone @properties.defaultValue
+        when (@isEmpty value) or (not @check value) then TypeChecker.clone @properties.defaultValue
         else TypeChecker.clone @parse value
 
 
