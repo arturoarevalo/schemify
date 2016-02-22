@@ -8,7 +8,7 @@ npm install schemify
 
 ## Basic usage
 ### Creating and validating a very simple schema
-```coffescript
+```coffeescript
 schema = require "schemify"
 
 Point = schema.of
@@ -45,7 +45,7 @@ Point.validate p3, true
 ```
 
 ### Creating new instances of a schema and cleaning existing ones
-```coffescript
+```coffeescript
 # create a new instance of a Point schema
 p4 = Point.createNew()
 # returns
@@ -66,7 +66,7 @@ p6 = Point.createNew p5
 ```
 
 ### Validators
-```coffescript
+```coffeescript
 # built-in standard validators
 schema.integer                      # integers
 schema.float                        # floats
@@ -96,7 +96,7 @@ schema.ulong = schema.uint32
 ```
 
 ### Required attributes
-```coffescript
+```coffeescript
 # by default, validators accept null/undefined values as valid ones
 Point = schema.of
     x: schema.integer
@@ -116,7 +116,7 @@ Point.check { x: 10 }
 ```
 
 ### Default values
-```coffescript
+```coffeescript
 # when creating new instances of a schema, or cleaning existing ones, empty or invalid valued will be replaced by the validator default value, which is null
 Point = schema.of
     x: schema.integer
@@ -146,7 +146,7 @@ Point.createNew { x: 10, y: true, z: 20 }
 ```
 
 ### Schema creation by values
-```coffescript
+```coffeescript
 # directly using values is the same as using validators with the required attribute and default values
 Product = schema.of
     id: 0
@@ -175,7 +175,7 @@ Person = schema.of
 ```
 
 ### Range checking
-```coffescript
+```coffeescript
 # use the .between function in a validator to set the minimum and maximum values
 Person = schema.of
     name: schema.string
@@ -188,7 +188,7 @@ Person.check { name: "John", age: 121 }     # false, age is out of range
 ```
 
 ### Set of values
-```coffescript
+```coffeescript
 # use the .in function in a validator to set a list of its possible values
 Person = schema.of
     name: schema.string
@@ -202,7 +202,7 @@ Person.check { name: "John", gender: "OTHER" }  # false, gender is out of range
 
 ## Advanced usage
 ### Nested objects
-```coffescript
+```coffeescript
 Person = schema.of
     name: schema.string.required.default "John Doe"
     age: schema.integer
@@ -235,7 +235,7 @@ p3 =
 ```
 
 ### Array validation
-```coffescript
+```coffeescript
 # elements inside an array can be validated against a schema
 
 # "items" can be null, empty [] or contain elements of mixed types [1, "2", {a:1, b:2}, true]
@@ -284,7 +284,7 @@ Example4.check { items: [{attr1: "10", attr2: "data"}, {attr1: "not a number"}, 
 ```
 
 ### Array cleaning
-```coffescript
+```coffeescript
 # when cleaning instances, array elements which don't validate are removed
 Example1 = schema.of
     numbers: schema.array.of schema.integer
@@ -299,7 +299,7 @@ Example1.validate { numbers: [1, "a", 2, 2.5, 3, true, false, 4, {a:1}, 5]}
 ```
 
 ### Composition
-```coffescript
+```coffeescript
 # schemas can be composed ...
 Address = schema.of
     street: schema.string
@@ -337,7 +337,7 @@ Example.validate b1
 ```
 
 ### Inheritance
-```coffescript
+```coffeescript
 # use the .with function of a object schema to create a new schema that inherits its attributes and extends them
 Person = schema.of
     name: schema.string
@@ -362,7 +362,7 @@ Person.check employeed, true    # false, salary is not an attribute of Person
 Employee.check person           # false, salary is missing
 ```
 
-```coffescript
+```coffeescript
 # inherited schemas can just change the behaviour of an attribute
 Person = schema.of
     name: schema.string
