@@ -11,7 +11,6 @@ class FloatSchema extends NumericSchema
     
     extend: (properties) ->
         n = new FloatSchema @properties, properties
-        n.required = new FloatSchema n.properties, required: true
         return n
 
     parse: (value) -> parseFloat value

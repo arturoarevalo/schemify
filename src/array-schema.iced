@@ -11,11 +11,11 @@ class ArraySchema extends AbstractSchema
 
     constructor: (properties, additional) ->
         super properties, additional
+
+    @getter "nonempty", -> @extend { required: true, nonempty: true }
     
     extend: (properties) ->
         n = new ArraySchema @properties, properties
-        n.required = new ArraySchema n.properties, required: true
-        n.nonempty = new ArraySchema n.properties, { required: true, nonempty: true }
         return n
 
     of: (obj) ->

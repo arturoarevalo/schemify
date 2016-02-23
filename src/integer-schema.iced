@@ -11,7 +11,6 @@ class IntegerSchema extends NumericSchema
     
     extend: (properties) ->
         n = new IntegerSchema @properties, properties
-        n.required = new IntegerSchema n.properties, required: true
         return n
 
     parse: (value) -> parseInt value

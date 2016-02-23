@@ -27,5 +27,8 @@
   "homepage": "https://github.com/arturoarevalo/schemify#readme",
   "devDependencies": {
     "iced-coffee-script": "^108.0.9"
+  },
+  "dependencies": {
+    "coffee-script-properties": "^1.0.0"
   }
 }

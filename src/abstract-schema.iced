@@ -13,6 +13,8 @@ class AbstractSchema
 
     default: (value) -> @extend defaultValue: @parse value
 
+    @getter "required", -> @extend required: true
+
     in: (list) ->
         @extend
             validValues: list

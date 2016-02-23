@@ -11,7 +11,6 @@ class BooleanSchema extends AbstractSchema
     
     extend: (properties) ->
         n = new BooleanSchema @properties, properties
-        n.required = new BooleanSchema n.properties, required: true
         return n
 
     isValidType: (value) -> TypeChecker.isBoolean value

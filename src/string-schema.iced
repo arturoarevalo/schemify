@@ -12,7 +12,6 @@ class StringSchema extends AbstractSchema
 
     extend: (properties) ->
         n = new StringSchema @properties, properties
-        n.required = new StringSchema n.properties, required: true
         return n
 
     isValidType: (value) -> TypeChecker.isString value
