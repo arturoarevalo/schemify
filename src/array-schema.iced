@@ -46,9 +46,15 @@ class ArraySchema extends AbstractSchema
         if @isEmpty(value) or @isInvalid(value)
             return TypeChecker.clone @properties.defaultValue
 
-        validator = @properties.elementSchema or Schemify.any
-
-        return (validator.createNew item for item in value when validator.check item)
+        validator = @properties.elementSchema
+        if validator
+            n = []
+            for item in value
+                newItem = validator.createNew item
+                n.push newItem if (newItem isnt null) and (validator.check newItem)
+            return n
+        else
+            return TypeChecker.clone value
 
 
 module.exports = ArraySchema

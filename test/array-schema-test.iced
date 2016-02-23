@@ -205,3 +205,40 @@ describe "array schema", () ->
             it "nonempty arrays", (done) ->
                 assert.strictEqual true, check [1,2,3,4]
                 done()
+
+
+    describe "with primitive element validator", () ->
+
+        describe "validates correctly", () ->
+
+            check = (param) ->
+                schema.array.of(schema.integer).check param
+
+            it "arrays of valid elements", (done) ->
+                assert.strictEqual true, check [1,2,3,4,5]
+                done()
+
+            it "arrays with invalid elements", (done) ->
+                assert.strictEqual false, check [1,2,"3",4,5]
+                done()
+
+
+        describe "creates correctly", () ->
+
+            check = (param) ->
+                schema.array.of(schema.integer).createNew param
+
+            it "null and undefined values", (done) ->
+                assert.deepEqual null, check null
+                assert.deepEqual null, check undefined
+                done()
+
+            it "arrays of valid elements", (done) ->
+                assert.deepEqual [1,2,3,4,5], check [1,2,3,4,5]
+                done()
+
+            it "arrays with invalid elements", (done) ->
+                console.log check [1,2,"3",4,5]
+                assert.deepEqual [1,2,4,5], check [1,2,"3",4,5]
+                done()
+                
