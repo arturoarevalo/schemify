@@ -13,12 +13,6 @@ class AbstractSchema
 
     default: (value) -> @extend defaultValue: @parse value
 
-    between: (minimum, maximum) ->
-        @extend 
-            limits: true
-            minimum: @parse minimum
-            maximum: @parse maximum
-
     in: (list) ->
         @extend
             validValues: list
@@ -48,13 +42,10 @@ class AbstractSchema
         if not @isValidType value
             return @invalidResult "#{typeof value} '#{value}' is not a valid value for field '#{fieldName}'"
 
-        if @properties.limits or @properties.validValues
+        if @properties.validValues
             value = @parse value
 
-            if @properties.limits and (value < @properties.minimum or value > @properties.maximum)
-                return @invalidResult "'#{value}' is not a valid value for field '#{fieldName}', should be between '#{@properties.minimum}' and '#{@properties.maximum}'"
-
-            if @properties.validValues and (value not in @properties.validValues)
+            if value not in @properties.validValues
                 return @invalidResult "'#{value}' is not a valid value for field '#{fieldName}', should be one of '#{@properties.validValues}'"
 
         return @validResult

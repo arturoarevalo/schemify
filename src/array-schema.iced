@@ -5,8 +5,9 @@ Schemify = require "./schemify"
 class ArraySchema extends AbstractSchema
 
     @DefaultProperties =
+        defaultValue: null
         required: false
-        defaultValue: []
+        nonempty: false
 
     constructor: (properties, additional) ->
         super properties, additional
@@ -14,6 +15,7 @@ class ArraySchema extends AbstractSchema
     extend: (properties) ->
         n = new ArraySchema @properties, properties
         n.required = new ArraySchema n.properties, required: true
+        n.nonempty = new ArraySchema n.properties, { required: true, nonempty: true }
         return n
 
     of: (obj) ->
@@ -22,22 +24,20 @@ class ArraySchema extends AbstractSchema
         else
             @extend elementSchema: Schemify.of obj
 
-    isEmpty: (value) -> (super value) or value.length is 0
+    isEmpty: (value) -> (super value) or (@properties.nonempty and value.length is 0)
 
     isValidType: (value) -> TypeChecker.isArray value
 
     validate: (value, exactMatch, fieldName) ->
         res = super value, exactMatch, fieldName
-        if not res.valid
-            return res
+        return res if not res.valid
 
         if not @isEmpty value
             validator = @properties.elementSchema or Schemify.any
 
             for element, i in value
                 res = validator.validate element, exactMatch, "#{fieldName}[#{i}]"
-                if not res.valid
-                    return res
+                return res if not res.valid
 
         return res
 

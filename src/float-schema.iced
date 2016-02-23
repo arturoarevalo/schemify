@@ -1,7 +1,7 @@
 TypeChecker = require "./type-checker"
-AbstractSchema = require "./abstract-schema"
+NumericSchema = require "./numeric-schema"
 
-class FloatSchema extends AbstractSchema
+class FloatSchema extends NumericSchema
 
     @DefaultProperties =
         defaultValue: null

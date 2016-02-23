@@ -176,15 +176,17 @@ Person = schema.of
 
 ### Range checking
 ```coffeescript
-# use the .between function in a validator to set the minimum and maximum values
+# numeric validators (integer, float) allow to set minimum and maximum values
 Person = schema.of
     name: schema.string
-    age: schema.integer.between 0, 120
+    age: schema.integer.minimum 0
+    fingers: schema.integer.between 0, 10
+    eyes: schema.integer.maximum 2
 
-# note that using .between doesn't make the attribute required ...
-Person.check { name: "John" }               # true, age can be null
+# note that using .between, .minimum or .maximum doesn't make the attribute required ...
+Person.check { name: "John" }               # true, all can be null
                                             # use .required instead
-Person.check { name: "John", age: 121 }     # false, age is out of range
+Person.check { name: "John", eyes: 3 }      # false, eyes is out of range
 ```
 
 ### Set of values
@@ -239,48 +241,29 @@ p3 =
 # elements inside an array can be validated against a schema
 
 # "items" can be null, empty [] or contain elements of mixed types [1, "2", {a:1, b:2}, true]
-Example1 = schema.of
-    items: schema.array     
+Example = schema.of
+    # can be null or empty []
+    # can contain elements of mixed types [1, "2", {a:1}]
+    items1: schema.array
 
-# all return true
-Example1.check { items: [1, "2", true, 4.0, {data:null}] }
-Example1.check { items: null }
-Example1.check { }
+    # cannot be null, but can be empty []
+    # can contain elements of mixed types [1, "2", {a:1}]
+    items2: schema.array.required
 
+    # cannot be null nor empty []
+    # can contain elements of mixed types [1, "2", {a:1}]
+    items3: schema.array.nonempty
 
-# "items" CANNOT be null or empty, but can contain elements of mixed types [1, "2", {a:1, b:2}, true]
-Example2 = schema.of
-    items: schema.array.required
+    # cannot be null nor empty []
+    # can only contain elements of a single type (integers)
+    items4: schema.array.nonempty.of schema.integer
 
-# this returns true
-Example1.check { items: [1, "2", true, 4.0, {data:null}] }
-# but all these return false
-Example1.check { items: null }
-Example1.check { }
-
-
-# "items" can be null, empty [] or contain elements of the same type (integers)
-Example3 = schema.of
-    items: schema.array.of schema.integer
-
-# all return true
-Example1.check { items: [1, 2, 3, 4] }
-Example1.check { items: null }
-Example1.check { }
-# but this returns false
-Example1.check { items: [1, "2", true, 4.0, {data:null}] }
-
-
-# "items" CANNOT be null or empty [] and must contain elements of the same type (objects with a schema { attr1: integer, attr2: string })
-Example4 = schema.of
-    items: schema.array.required.of 
+    # cannot be null nor empty []
+    # can only contain elements of a single type,
+    #   objects with the following schema { attr1: integer, attr2: string }
+    items5: schema.array.nonempty.of
         attr1: schema.integer
         attr2: schema.string
-
-# this returns true
-Example4.check { items: [{attr1: 10, attr2: "data"}, {attr1: 20}, {attr2: "data"}]}
-# this returns false, as the first element of the array is valid but the other aren't
-Example4.check { items: [{attr1: "10", attr2: "data"}, {attr1: "not a number"}, {attr2: 10}]}
 ```
 
 ### Array cleaning
@@ -294,7 +277,7 @@ Example1 = schema.of
 Example1.createNew { numbers: [1, "a", 2, 2.5, 3, true, false, 4, {a:1}, 5]}
 
 # validation of arrays show which element failed
-# returns { valid: false, error: "string 'a' os not a valid value for attribute 'numbers[1]'"}
+# returns { valid: false, error: "string 'a' is not a valid value for attribute 'numbers[1]'"}
 Example1.validate { numbers: [1, "a", 2, 2.5, 3, true, false, 4, {a:1}, 5]}
 ```
 
@@ -396,7 +379,7 @@ Employee.check retired      # false, age > 65
 
 
 # TODO
-- Write tests
+- Write (more) tests
 - Better documentation
 - Additional validators, i.e. date
 - Additional validations, i.e. string.(max|min)length, integer.minimum|maximum
