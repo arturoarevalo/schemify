@@ -1,6 +1,6 @@
 {
   "name": "schemify",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "A lightweight and simple framework for complex object schema validation, including nested objects, arrays and inheritance, with a nice syntax in coffeescript.",
   "main": "./lib/schemify.js",
   "scripts": {
