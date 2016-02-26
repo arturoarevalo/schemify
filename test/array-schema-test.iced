@@ -219,7 +219,7 @@ describe "array schema", () ->
                 done()
 
             it "arrays with invalid elements", (done) ->
-                assert.strictEqual false, check [1,2,"3",4,5]
+                assert.strictEqual false, check [1,2,"invalid",4,5]
                 done()
 
 
@@ -238,7 +238,6 @@ describe "array schema", () ->
                 done()
 
             it "arrays with invalid elements", (done) ->
-                console.log check [1,2,"3",4,5]
-                assert.deepEqual [1,2,4,5], check [1,2,"3",4,5]
+                assert.deepEqual [1,2,4,5], check [1,2,"invalid",4,5]
                 done()
                 

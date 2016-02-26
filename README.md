@@ -25,10 +25,10 @@ Point.check p1
 
 # use <Schema>.validate() to obtain information about what failed during the validation
 p2 = 
-    x: "10"
+    x: "not a number"
     y: 20
 
-# returns an object { valid: false, error: "string '10' is not a valid value for field 'x'"}
+# returns an object { valid: false, error: "string 'not a number' is not a valid value for field 'x'"}
 Point.validate p2 
 
 # both check/validate accept a second parameter (exactMatch) to force the object being validated to have the exact structure as the schema
@@ -54,7 +54,7 @@ p4 = Point.createNew()
 
 # create a new instance, based on p5, which conforms to the schema
 p5 = 
-    x: '10'
+    x: 'not a number'
     y: 20
     z: 30
 
@@ -172,6 +172,18 @@ Person = schema.of
     name: schema.string
     age: 0
     gender: "F"
+```
+
+### Strict mode
+```coffeescript
+# by default, integer validators accept string values that can be parsed to valid integers. This can be changed using the .strict property
+Point = schema.of
+    x: schema.integer
+    y: schema.integer.strict
+    
+Point.check { x: 10, y: 20 }        # true, all are valid integers
+Point.check { x: "10", y: 20 }      # true, x is a valid parseable integer 
+Point.check { x: 10, y: "20" }      # false, y should be a primitive integer
 ```
 
 ### Range checking

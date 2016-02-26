@@ -4,7 +4,10 @@ TypeChecker =
 
     isNumeric: (value) -> "number" is typeof value
 
-    isInteger: (value) -> switch
+    isInteger: (value) ->
+        (value.toString().match /^[0-9]*$/) and TypeChecker.isStrictInteger parseInt value
+
+    isStrictInteger: (value) -> switch
         when Number.isInteger then Number.isInteger value
         else ("number" is typeof value) and (isFinite value) and (value > -9007199254740992) and (value < 9007199254740992) and (value is Math.floor value)
 
