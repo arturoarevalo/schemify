@@ -1,7 +1,0 @@
-
-
-class Schemify {
-
-}
-
-export { Schemify };

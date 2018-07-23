@@ -1,20 +1,31 @@
 {
     "compileOnSave": false,
     "compilerOptions": {
-        "target": "es2015",
-        "outDir": "dist",
-        "module": "commonjs",
         "declaration": true,
         "noImplicitAny": true,
-        "removeComments": true,
+        "noImplicitReturns": true,
+        "noImplicitThis": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": false,
+        "strictNullChecks": true,
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "target": "es2017",
+        "lib": [
+            "es2017"
+        ],
+        "sourceMap": true,
+        "outDir": "dist",
+        "module": "commonjs",
         "moduleResolution": "node",
-        "sourceMap": true
+        "skipLibCheck": true
     },
     "include": [
         "source/**/*.ts"
     ],
     "exclude": [
         "node_modules",
+        "dist",
         "**/*.spec.ts"
     ]
 }

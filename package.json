@@ -1,11 +1,13 @@
 {
     "name": "schemify",
-    "version": "1.1.0",
-    "description": "A lightweight and simple framework for complex object schema validation, including nested objects, arrays and inheritance.",
-    "main": "./dist/lib/schemify.js",
-    "types": "./dist/lib/schemify.d.ts",
+    "version": "2.0.0",
+    "description": "An opinionated, minimalist, dependency-free but functional TypeScript framework for complex object schema validation, including nested objects, arrays and inheritance",
+    "main": "dist/lib/index.js",
+    "types": "dist/lib/index.d.ts",
     "scripts": {
-        "test": "./node_modules/.bin/mocha ./dist/tests/*.test.js",
+        "test": "ts-node source/test/index.ts",
+        "build": "rm -rf dist && ./node_modules/.bin/tsc -p .",
+        "lint": "tslint --project .",
         "prepublish": "rm -rf dist && ./node_modules/.bin/tsc -p ."
     },
     "repository": {
@@ -14,23 +16,19 @@
     },
     "keywords": [
         "schema",
-        "scheme",
         "validation",
-        "conform"
+        "typescript"
     ],
-    "author": "Arturo Arévalo",
+    "author": "Arturo Arevalo",
     "license": "MIT",
     "bugs": {
         "url": "https://github.com/arturoarevalo/schemify/issues"
     },
     "homepage": "https://github.com/arturoarevalo/schemify#readme",
-    "devDependencies": {},
-    "dependencies": {
-        "@types/mocha": "^2.2.32",
-        "@types/should": "^8.1.30",
-        "mocha": "^3.1.2",
-        "should": "^11.1.1",
-        "tslint": "^3.15.1",
-        "typescript": "^2.0.3"
+    "devDependencies": {
+        "@types/node": "^10.5.2",
+        "ts-node": "^7.0.0",
+        "tslint": "^5.11.0",
+        "typescript": "^2.9.2"
     }
 }

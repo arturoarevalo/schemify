@@ -1,7 +1,6 @@
 .npmignore
+package-lock.json
 .DS_Store
 npm-debug.log
 source/
 dist/tests/
-samples/
-playground/

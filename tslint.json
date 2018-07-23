@@ -17,24 +17,23 @@
             true,
             "spaces"
         ],
+        "interface-name": [
+            false
+        ],
         "jsdoc-format": true,
         "label-position": true,
-        "label-undefined": true,
         "max-line-length": [
             false
         ],
         "member-access": false,
-        "member-ordering": [
-            true,
-            "public-before-private",
-            "static-before-instance",
-            "variables-before-functions"
-        ],
+        "member-ordering": false,
         "no-any": false,
         "no-arg": true,
         "no-bitwise": false,
         "no-conditional-assignment": false,
-        "no-consecutive-blank-lines": true,
+        "no-consecutive-blank-lines": [
+            true
+        ],
         "no-console": [
             true,
             "debug",
@@ -46,11 +45,12 @@
         "no-construct": true,
         "no-constructor-vars": false,
         "no-debugger": true,
-        "no-duplicate-key": true,
         "no-duplicate-variable": true,
         "no-empty": false,
         "no-eval": true,
-        "no-inferrable-types": true,
+        "no-inferrable-types": [
+            true
+        ],
         "no-internal-module": true,
         "no-null-keyword": false,
         "no-require-imports": false,
@@ -58,13 +58,12 @@
         "no-string-literal": false,
         "no-switch-case-fall-through": false,
         "no-trailing-whitespace": true,
-        "no-unreachable": true,
         "no-unused-expression": true,
         "no-unused-variable": false,
         "no-use-before-declare": true,
         "no-var-keyword": true,
         "no-var-requires": false,
-        "object-literal-sort-keys": true,
+        "object-literal-sort-keys": false,
         "one-line": [
             true,
             "check-open-brace",
@@ -74,7 +73,7 @@
         ],
         "quotemark": [
             true,
-            "single"
+            "double"
         ],
         "radix": true,
         "semicolon": [
@@ -84,7 +83,7 @@
         "trailing-comma": [
             true,
             {
-                "multiline": "always",
+                "multiline": "never",
                 "singleline": "never"
             }
         ],
@@ -106,9 +105,6 @@
                 "property-declaration": "nospace",
                 "variable-declaration": "nospace"
             }
-        ],
-        "use-strict": [
-            true
         ],
         "variable-name": false,
         "whitespace": [
